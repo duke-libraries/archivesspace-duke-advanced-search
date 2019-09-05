@@ -1,4 +1,4 @@
-class CommonIndexer
+class IndexerCommon
   self.add_attribute_to_resolve("linked_events")
 
   self.add_indexer_initialize_hook do |indexer|
