@@ -33,7 +33,7 @@ class IndexerCommon
         
         #Add file version to index?
         if fv = record['record']['file_version']
-          doc['file_version_use_statement_u_ustr'] = fv['use_statement']
+          doc['file_version_use_statement'] = fv['use_statement']
         end
 
         doc['linked_instance_uris'] = record['record']['linked_instances'].
