@@ -21,25 +21,6 @@ class IndexerCommon
       end
     }
 
-   # File Version Record added for v2.8.1
-    indexer.add_document_prepare_hook {|doc, record|
-      if doc['primary_type'] == 'digital_object'
-        doc['digital_object_type'] = record['record']['digital_object_type']
-        doc['digital_object_id'] = record['record']['digital_object_id']
-        doc['level'] = record['record']['level']
-        doc['restrictions'] = record['record']['restrictions']
-        doc['slug'] = record['record']['slug']
-        doc['is_slug_auto'] = record['record']['is_slug_auto']
-        
-        #Add file version to index?
-        doc['file_version_use_statement'] = record['record']['file_version']['use_statement']
-
-        doc['linked_instance_uris'] = record['record']['linked_instances'].
-                                         collect{|instance| instance["ref"]}.
-                                         compact.uniq
-      end
-    }
-
     # Index extra fields for all records
     indexer.add_document_prepare_hook {|doc, record|
       # linked agent roles
@@ -69,6 +50,11 @@ class IndexerCommon
         doc['date_end_u_udate'] = record['record']['dates'].collect{|date|
           fuzzy_time_parse(date['end'])
         }.compact
+      end
+
+      # File Version Record added for v2.8.1
+      if record['record']['file_version']
+        doc['file_version_use_statement_u_ustr'] = record['record']['file_version']['use_statement']
       end
       
       # Collection Management Record
