@@ -32,9 +32,7 @@ class IndexerCommon
         doc['is_slug_auto'] = record['record']['is_slug_auto']
         
         #Add file version to index?
-        if fv = record['record']['file_version']
-          doc['file_version_use_statement'] = fv['use_statement']
-        end
+        doc['file_version_use_statement'] = record['record']['file_version']['use_statement']
 
         doc['linked_instance_uris'] = record['record']['linked_instances'].
                                          collect{|instance| instance["ref"]}.
