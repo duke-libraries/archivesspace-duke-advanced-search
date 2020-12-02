@@ -52,11 +52,6 @@ class IndexerCommon
         }.compact
       end
 
-      # File Version Record added for v2.8.1
-      if record['record']['file_version']
-        doc['file_version_use_statement_u_ustr'] = record['record']['file_version']['use_statement']
-      end
-      
       # Collection Management Record
       if record['record']['collection_management']
         doc['collection_management_processing_priority_u_ustr'] = record['record']['collection_management']['processing_priority']
@@ -87,7 +82,6 @@ class IndexerCommon
       end
     }
 
-    
     # Index user defined fields
     indexer.add_document_prepare_hook {|doc, record|
       if record['record']['user_defined']
